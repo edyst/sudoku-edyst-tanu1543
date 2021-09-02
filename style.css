@@ -1,1 +1,32 @@
-
+body{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 25px;
+}
+td{
+    height: 60px;
+    font-size: 25px;
+    width: 60px;    
+    border: 1px solid #bec6d4;
+}
+input{
+    text-align: center;
+    border: none;
+    font-size: 25px;
+    width:60px;height: 60px;
+}
+input:focus{
+    outline: none;
+    background-color: #bbdefb !important;
+}
+input:hover{
+    background-color: #bbdefb !important;
+}
+input[type="text"][disabled] {
+    background-color: #ebebe4 !important;
+}
+button{
+    width:70px;
+    height: 30px;
+    border: 1px solid #ebebe4; 
+    background-color: #ebebe4;
+}
