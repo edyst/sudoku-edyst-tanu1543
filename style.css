@@ -2,6 +2,15 @@ body{
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 25px;
 }
+.animate {
+    background-color: #E2EBF3;
+}
+.jaat{
+    background-color: white !important;
+}
+.prefilled {
+    background-color: #e6ebcd !important;
+}
 td{
     height: 60px;
     font-size: 25px;
