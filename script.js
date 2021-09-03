@@ -1,61 +1,147 @@
 var arr=[];
 var table;
+var ctr=1;
 $(document).on('click', '#b1', function(){
+       ctr=1;
         table=document.getElementById("t1");
     })
  $(document).on('click', '#b2', function(){
+       ctr=2;
         table=document.getElementById("t22");
     })
 $(document).on('click', '#b3', function(){
+    ctr=3;
        table=document.getElementById("t3");
     })
-    $(document).ready(function () {
-        $('tr').click(function () {
-            $(document).ready(function () {
-                $('tr').click(function () {
-                  $('tr').find("input").css('background-color', 'white');
-                    $(this).find("input").css('background-color', '#e2ebf3');
-                });
-            });
-        });
-    });
-$(document).on('click', 'td', function() {
-    var that = $(this);
-    var i = that.index();
-    var n = 9;
-    that.closest('table').find('td').removeClass('red');
-    for (m=0;m<=n;m++) {
-      that.closest('table').find('tr').eq(m).find('td').eq(i).find("input").css('background-color', '#e2ebf3');
+    function funcy(pos, blockcheck) {
+        for (let i = 1; i <= 81; i++) {
+            document.getElementById(`${i}`).classList.remove("animate")
+        }
+        var ctr = 0;
+        var g1;
+        var g2;
+        for (let i = 0; i < 9; i++) {
+            for (let j = 0; j < 9; j++) {
+                ctr++;
+                if (ctr == pos) {
+                    g1 = i;
+                    g2 = j;
+                    break;
+                }
+            }
+        }
+        var a = g1;
+        var b = g2;
+        //for row//
+        for (var j = 0; j <= 8; j++) {
+            const cellid1 = a * 9 + j + 1;
+            document.querySelector(`#cell-${cellid1} input`).classList.add("animate");
+        }
+        //for column//
+        for (var i = 0; i <= 8; i++) {
+            const cellid1 = i * 9 + b + 1;
+            document.querySelector(`#cell-${cellid1} input`).classList.add("animate");
+        }
+        var x = document.getElementsByClassName(blockcheck)
+        for (var k = 0; k < x.length; k++) {
+            x[k].classList.add("animate");
+        }
+        }
+    function easysudoku() {
+        var modify = document.getElementById("easy");
+        document.getElementById("hard").removeAttribute("style");
+        document.getElementById("medium").removeAttribute("style");
+        modify.setAttribute("style", "background-color: #BBDEFB");
+        const board = [
+            [2,0,5,0,0,9,0,0,4],
+            [0,0,0,0,0,0,3,0,7],
+            [7,0,0,8,5,6,0,1,0],
+            [4,5,0,7,0,0,0,0,0],
+            [0,0,9,0,0,0,1,0,0],
+            [0,0,0,0,0,2,0,8,5],
+            [0,2,0,4,1,8,0,0,6],
+            [6,0,8,0,0,0,0,0,0],
+            [1,0,0,2,0,0,7,0,8]
+        ]
+        for (i = 0; i < 9; i++) {
+            for (j = 0; j < 9; j++) {
+                const cellid = i * 9 + j + 1
+                if (board[i][j] === 0) {
+                    document.querySelector(`#cell-${cellid} input`).value = ""
+                    document.querySelector(`#cell-${cellid} input`).classList.remove("prefilled");
+                    document.querySelector(`#cell-${cellid} input`).readOnly = false;
+                } else {
+                    document.querySelector(`#cell-${cellid} input`).value = board[i][j]
+                    document.querySelector(`#cell-${cellid} input`).classList.add("prefilled");
+                    document.querySelector(`#cell-${cellid} input`).readOnly = true;
+                }
+            }
+        }
     }
-  });
-
-function bufunc1()
-{
-    document.getElementById("b1").style.border= "2px solid #bbdefb";
-    document.getElementById("b2").style.border= "none";
-    document.getElementById("b3").style.border= "none";
-    document.getElementById("d1").style.display = "block";
-    document.getElementById("d2").style.display = "none";
-    document.getElementById("d3").style.display = "none";
-}
-function bufunc2()
-{
-    document.getElementById("b2").style.border= "2px solid #bbdefb";
-    document.getElementById("b1").style.border= "none";
-    document.getElementById("b3").style.border= "none";
-    document.getElementById("d2").style.display = "block";
-    document.getElementById("d1").style.display = "none";
-    document.getElementById("d3").style.display = "none";
-}
-function bufunc3()
-{
-    document.getElementById("b3").style.border= "2px solid #bbdefb";
-    document.getElementById("b2").style.border= "none";
-    document.getElementById("b1").style.border= "none";
-    document.getElementById("d3").style.display = "block";
-    document.getElementById("d1").style.display = "none";
-    document.getElementById("d2").style.display = "none";
-}
+    
+    function mediumsudoku() {
+        document.getElementById("hard").removeAttribute("style");
+        document.getElementById("easy").removeAttribute("style");
+        var modify = document.getElementById("medium");
+        modify.setAttribute("style", "background-color: #BBDEFB");
+        const board = [
+            [0,0,6,0,9,0,2,0,0],
+            [0,0,0,7,0,2,0,0,0],
+            [0,9,0,5,0,8,0,7,0],
+            [9,0,0,0,3,0,0,0,6],
+            [7,5,0,0,0,0,0,1,9],
+            [1,0,0,0,4,0,0,0,5],
+            [0,1,0,3,0,9,0,8,0],
+            [0,0,0,2,0,1,0,0,0],
+            [0,0,9,0,8,0,1,0,0]
+        ]
+        for (i = 0; i < 9; i++) {
+            for (j = 0; j < 9; j++) {
+                const cellid = i * 9 + j + 1
+                if (board[i][j] === 0) {
+                    document.querySelector(`#cell-${cellid} input`).value = ""
+                    document.querySelector(`#cell-${cellid} input`).readOnly = false;
+                    document.querySelector(`#cell-${cellid} input`).classList.remove("prefilled");
+                } else {
+                    document.querySelector(`#cell-${cellid} input`).value = board[i][j]
+                    document.querySelector(`#cell-${cellid} input`).classList.add("prefilled");
+                    document.querySelector(`#cell-${cellid} input`).readOnly = true;
+                }
+            }
+        }
+    }
+    
+    function hardsudoku() {
+        var modify = document.getElementById("hard");
+        modify.setAttribute("style", "background-color: #BBDEFB;");
+        document.getElementById("easy").removeAttribute("style");
+        document.getElementById("medium").removeAttribute("style");
+        const board = [
+            [0,0,0,8,0,0,0,0,0],
+            [7,8,9,0,1,0,0,0,6],
+            [0,0,0,0,0,6,1,0,0],
+            [0,0,7,0,0,0,0,5,0],
+            [5,0,8,7,0,9,3,0,4],
+            [0,4,0,0,0,0,2,0,0],
+            [0,0,3,2,0,0,0,0,0],
+            [8,0,0,0,7,0,4,3,9],
+            [0,0,0,0,0,1,0,0,0]
+        ]
+        for (i = 0; i < 9; i++) {
+            for (j = 0; j < 9; j++) {
+                const cellid = i * 9 + j + 1
+                if (board[i][j] === 0) {
+                    document.querySelector(`#cell-${cellid} input`).value = ""
+                     document.querySelector(`#cell-${cellid} input`).classList.remove("prefilled");
+                    document.querySelector(`#cell-${cellid} input`).readOnly = false;
+                } else {
+                    document.querySelector(`#cell-${cellid} input`).value = board[i][j]
+                    document.querySelector(`#cell-${cellid} input`).classList.add("prefilled");
+                    document.querySelector(`#cell-${cellid} input`).readOnly = true;
+                }
+            }
+        }
+    }
 function func()
 {
     var ctrn=0;
@@ -321,3 +407,4 @@ if(k)
     alert("congratulations completed");
 }
 }  
+
